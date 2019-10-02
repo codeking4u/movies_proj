@@ -124,6 +124,10 @@ nav ul li a.active {
   padding: 2px;
   cursor: pointer;
 }
+.filters .pagination .pages {
+  font-size: 20px;
+  padding: 5px;
+}
 .main {
   margin-left: 300px;
   /* Same as the width of the sidenav */

@@ -11,12 +11,9 @@ function get($param , $def=""){
 
 function get_movies(){
     global $conn;
+    $page=1;
+    $per_page=6;
     $sql = "select DISTINCT movies.* from movies";
-        
-    /* if(isset($_REQUEST['langs']) && isset($_REQUEST['genres']) ){
-        $res_array = array_merge( $_REQUEST['langs'] , $_REQUEST['genres'] );
-        $join = " JOIN term_movie_relationships ";
-    }else */
     $join = "";
     $where = "";
     if(isset($_REQUEST['langs'])){
@@ -54,6 +51,14 @@ function get_movies(){
             $sql .= " ORDER BY movies.likes DESC ";
         }
     }
+    $full_res = mysqli_query($conn, $sql); 
+    $total_pages = ceil($full_res->num_rows/$per_page);
+    
+    if(isset($_REQUEST['curr-page'])&&($_REQUEST['curr-page']>0)){
+        $page = $_REQUEST['curr-page'];
+    }
+	$offset= ($page*$per_page)-$per_page;
+	$sql .= " LIMIT  $offset, $per_page ";
     $result = mysqli_query($conn, $sql);
     ob_start();
     while( $row = mysqli_fetch_assoc( $result)){ ?>
@@ -63,16 +68,16 @@ function get_movies(){
             <div class="overlay-content">
             <h3 class="title"><?php echo $row['title']?></h3>
             <p class="text"><?php echo $row['description']?></p>
-            <h6><?php echo $row['release_date']?></h6>
+            <h6><?php echo 'Release Date : ' .$row['release_date']?></h6>
             </div>
         </div>
         <h5 class="card_title"><?php echo $row['title']?></h5>
+
     </div>
     <?php
     }
-    $variable = ob_get_clean();
-    echo $variable;
-    //echo json_encode($new_array);
+    $movie_data = ob_get_clean();
+    echo json_encode(array('total_page'=>$total_pages,'data'=>$movie_data));
 }
 
 function get_titles($type){
