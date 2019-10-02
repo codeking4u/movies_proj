@@ -1,0 +1,133 @@
+body {
+  background-color: #363535;
+  color: #fff;
+}
+nav {
+  background-color: #a6ff00;
+  color: white;
+  padding: 25px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  z-index: 9;
+}
+nav ul li {
+  display: inline-block;
+  padding-right: 10px;
+}
+nav ul li a {
+  font-size: 20px;
+  font-weight: 700;
+}
+nav ul li a:visited,
+nav ul li a nav li a:link {
+  color: white;
+  text-decoration: none;
+}
+nav ul li a:hover {
+  color: #141313;
+}
+nav ul li a.active {
+  background-color: #fceeee;
+  padding: 10px;
+  color: #578600;
+}
+/* movie card */
+.cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.card {
+  margin: 30px ;
+  width: 300px;
+  height: 300px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 10px 7px #a6ff00, -1px -1px 20px 5px #a6ff00;
+  cursor: pointer;
+  transition: 0.4s;
+  position: relative;
+}
+.card:hover .overlay {
+  opacity: 0.9;
+}
+.card .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #000000;
+}
+.card .overlay .overlay-content {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+}
+.card .card_title {
+  color: white;
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: -80px;
+  height: 40px;
+}
+.filters {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 90px;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.filters .filter {
+  padding: 15px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+}
+.filters .checkbox-container {
+  border-bottom: 1px solid #a6ff00;
+  width: 200px;
+  height: 100px;
+  overflow-y: scroll;
+}
+.filters .pagination .curr-page {
+  width: 50px;
+  height: 40px;
+  color: #000;
+}
+.filters .pagination .prev,
+.filters .pagination .next {
+  margin: 8px;
+  border: 3px solid;
+  padding: 2px;
+  cursor: pointer;
+}
+.main {
+  margin-left: 300px;
+  /* Same as the width of the sidenav */
+  font-size: 28px;
+  /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}

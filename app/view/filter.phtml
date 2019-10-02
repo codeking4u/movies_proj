@@ -1,0 +1,46 @@
+<div class="filters">
+	<form id="filter-form" action="">
+		<div class="filter_by_lang filter">
+			<label>Filter by Language : </label>
+			<div class="checkbox-container genre">
+			<?php 
+				foreach($genres as $key=>$val){
+				?>
+				<input class="filter_checkbox" name="genres[]" type="checkbox" value="<?php echo $key; ?>" /><?php echo $val; ?><br />
+			<?php
+				}
+			?>
+			</div>
+		</div>
+		<div class="filter_by_gen filter">
+			<label>Filter by Genre : </label>
+			<div class="checkbox-container language">
+			<?php 
+				foreach($lang as $key=>$val){
+				?>
+				<input class="filter_checkbox" type="checkbox" name="langs[]"  value="<?php echo $key; ?>" /><?php echo $val; ?><br />
+			<?php
+				}
+			?>
+			</div>
+		</div>
+		<div class="sort_by filter">
+			<label>Sort by : </label>
+			<select id="length-sort" class="filter" name="sort_by">
+				<option value="0">Select</option>
+				<option value="length" >Duration</option>
+				<option value="likes" >Popularity</option>
+			</select>
+		</div>
+		<div class="pagination">
+			<div class="page-prev">
+				<span class="prev"> < </span>
+				<input type="number" name="curr-page" class="curr-page"value=1 />
+				<span class="next"> > </span>
+			</div>
+			<div> Total pages : 
+				<span class="total-page">21</span>
+			</div> 
+		</div>
+	</form>
+</div>
