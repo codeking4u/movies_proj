@@ -72,7 +72,16 @@ function get_movies(){
             </div>
         </div>
         <h5 class="card_title"><?php echo $row['title']?></h5>
-
+        <div class="detail-main">
+            <div class="card-detail">
+                <div class="genre_title">GENRE: <?php echo get_taxonomy_name($row['id'],'genre')?></div>
+                <div class="language_title">LANGUAGE: <?php echo get_taxonomy_name($row['id'],'language')?></div>
+            </div>
+            <div class="card-detail">
+                <div class="likes">LIKES: <?php echo $row['likes'];?></div>
+                <div class="duration">DURATION: <?php echo $row['duration_in_min'].' mins';?></div>
+            </div>
+        </div>
     </div>
     <?php
     }
@@ -88,6 +97,19 @@ function get_titles($type){
 			$res[$row['term_id']] = $row['title'];
 		}
 		return $res;
+}
+function get_taxonomy_name($movie_id,$taxonomy_type){
+    global $conn;
+    $res = array();
+    $sql = "select tl.title from term_movie_relationships 
+    JOIN term_list tl ON tl.term_id =term_movie_relationships.term_id
+    JOIN taxonomy_list ta ON ta.id = tl.taxonomy_id
+    where term_movie_relationships.movie_id = $movie_id AND ta.taxonomy_name='$taxonomy_type'";
+    $result = mysqli_query($conn, $sql);
+    while($row = $result->fetch_assoc()){
+        $res[] = $row['title'];
+    }
+    return implode(',',$res);
 }
 
 ?>
